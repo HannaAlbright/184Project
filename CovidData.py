@@ -6,7 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 def graphFrequencies(df, folder):
     dfnona=df.dropna()
     for col in dfnona.columns:
-        val = dfnona[col].value_counts()
+        val = dfnona[col].value_counts() #counts frequency of all values except NA
         val["NA"] = df[col].isna().sum()  # need to add column for NA manually
         gTitle = col + " Value Frequencies"
         val.plot(kind="bar", rot=15, title=gTitle, ylabel="Frequency", fontsize=5, figsize=(7.5, 5.5))
@@ -18,36 +18,35 @@ print(df.shape)
 df2=df.drop(["case_month"], axis=1)#I don't think we need case_month because the csv file only had data from 2020 but will keep for now just incase
 #graphFrequencies(df2, "Column_counts")
 #####selectkbest categorical
-dfxnum=df.drop(["case_month", "state_fips_code", "county_fips_code", "age_group", "sex", "race", "ethnicity", "process", "exposure_yn", "current_status", "symptom_status", "hosp_yn", "icu_yn", "underlying_conditions_yn"], axis=1)
-print(dfxnum["case_positive_specimen_interval"].drop_duplicates())
-print(dfxnum["case_onset_interval"].drop_duplicates())
+dfxnum=df.drop(["case_month", "state_fips_code", "county_fips_code", "age_group", "sex", "race", "ethnicity", "process", "exposure_yn", "current_status", "symptom_status", "hosp_yn", "icu_yn", "underlying_conditions_yn"], axis=1) #drop categorical values
+# print(dfxnum["case_positive_specimen_interval"].drop_duplicates())
+# print(dfxnum["case_onset_interval"].drop_duplicates())
 dfxnum=dfxnum.dropna()
-print(dfxnum["case_positive_specimen_interval"].drop_duplicates())
-print(dfxnum["case_onset_interval"].drop_duplicates())
+# print(dfxnum["case_positive_specimen_interval"].drop_duplicates())
+# print(dfxnum["case_onset_interval"].drop_duplicates())
 dfxnumbool=~dfxnum.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
 dfxbnum=dfxnumbool.all(axis=1)#returns bool series (True if the row has all true values)
 dfx2num=dfxnum.loc[dfxbnum]
 #featuresnum=["case_positive_specimen_interval", "case_onset_interval"]
-print(dfx2num["case_positive_specimen_interval"].drop_duplicates())
-print(dfx2num["case_onset_interval"].drop_duplicates())
-featuresnum=pd.Series(dfx2num.drop("death_yn",axis=1).columns)
-xnum=dfx2num.drop("death_yn",axis=1).values
-ynum=dfx2num["death_yn"].values
-selectnum = SelectKBest(score_func=f_classif, k=1)
+# print(dfx2num["case_positive_specimen_interval"].drop_duplicates())
+# print(dfx2num["case_onset_interval"].drop_duplicates())
+featuresnum=pd.Series(dfx2num.drop("death_yn",axis=1).columns) #series of the numerical features
+xnum=dfx2num.drop("death_yn",axis=1).values #array of x values of the numerical features
+ynum=dfx2num["death_yn"].values  #array of y values (target variable) which is death_yn
+selectnum = SelectKBest(score_func=f_classif, k=1) #since there are only 2 numerical features, we only need k=1 to see which is the better feature
 znum = selectnum.fit_transform(xnum, ynum)
 colsnum = selectnum.get_support()
 print("K=1", " Features: ", featuresnum.loc[colsnum].values)
 ####################
 dfx=df.drop(["case_month","case_positive_specimen_interval", "case_onset_interval"], axis=1)
-dfx["sex"].replace("Unknown", "Other/Unknown", inplace=True)
+dfx["sex"].replace("Unknown", "Other/Unknown", inplace=True) #replace unknown with other/unknown as a third option for gender and so that it isn't dropped
 dfx=dfx.dropna()
 dfxbool=~dfx.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
 dfxb=dfxbool.all(axis=1)#returns bool series (True if the row has all true values)
-dfx2=dfx.loc[dfxb]
-print(dfx2["sex"].drop_duplicates())
-dfx3=dfx2.copy()
+dfx2=dfx.loc[dfxb] #get only the rows without unknown or missing
+# print(dfx2["sex"].drop_duplicates())
 for col in ["age_group", "sex", "race", "ethnicity", "process", "exposure_yn", "current_status", "symptom_status", "hosp_yn", "icu_yn", "death_yn", "underlying_conditions_yn"]:
-    le=LabelEncoder()
+    le=LabelEncoder()#label encode categorical variables to prepare for selectkbest
     dfx2.loc[:,col]=le.fit_transform(dfx2.loc[:,col])
 
 features=pd.Series(dfx2.drop(["death_yn"],axis=1).columns)
