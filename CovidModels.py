@@ -21,7 +21,7 @@ for filenum in [1,2,3,4,5,6,7,8,9]:
     print("\n", dset, " Shape: ", df.shape)
     x=df.drop(["death_yn"], axis=1)
     x=x.astype("category")
-    x2 = pd.get_dummies(x) # county code wont do OHE!
+    x2 = pd.get_dummies(x)
     xOHE = x2.to_numpy()
     y = df["death_yn"].values
     le = preprocessing.LabelEncoder()
