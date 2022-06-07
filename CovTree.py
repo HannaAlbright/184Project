@@ -47,6 +47,7 @@ covidFiles=["CovData/df10.csv","CovData/dftree1.csv", "CovData/dftree2.csv","Cov
 for dset in covidFiles:
     df=pd.read_csv(dset)
     x=df.drop("death_yn", axis=1)
+    x = x.astype("category")
     x2 = pd.get_dummies(x)  # county code wont do OHE!
     xOHE = x2.to_numpy()
     y = df["death_yn"].values
