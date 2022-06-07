@@ -19,8 +19,6 @@ for filenum in [1,2,3,4,5,6,7,8,9]:
     dset="CovData/df" + str(filenum)+".csv"
     df=pd.read_csv(dset)
     print("\n", dset, " Shape: ", df.shape)
-    if "county_fips_code" in df.columns:
-        df = df.drop(["county_fips_code"], axis=1)
     x=df.drop(["death_yn"], axis=1)
     x=x.astype("category")
     x2 = pd.get_dummies(x) # county code wont do OHE!

@@ -76,8 +76,8 @@ df["sex"].replace("Unknown", "Other/Unknown", inplace=True)
 # df3after.to_csv("CovData/df3.csv", index=False)
 # ['icu_yn', 'hosp_yn', 'age_group,'county_fips_code', 'process', 'underlying_conditions_yn', 'ethnicity,  'sex', 'symptom_status, 'race', 'current_status', ‘'state_fips_code', 'exposure_yn'
 
-df.drop("state_fips_code","county_fips_code","case_month",)
-df1=df.drop(["underlying_conditions_yn", "ethnicity", "sex","symptom_status", "race", "current_status", "exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
+
+df1=df.drop(["case_month","underlying_conditions_yn", "ethnicity", "sex","symptom_status", "race", "current_status", "state_fips_code", "exposure_yn","case_onset_interval", "case_positive_specimen_interval","county_fips_code"], axis=1) #columns to definitely drop
 print("Before: ", df1.shape)
 df1.dropna(inplace=True)
 df1bool=~df1.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
@@ -87,7 +87,7 @@ print("After: ", df1after.shape)
 df1after.to_csv("CovData/df1.csv", index=False)
 
 
-df2=df.drop(["ethnicity",  "sex","symptom_status", "race", "current_status", "exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
+df2=df.drop(["case_month", "ethnicity",  "sex","symptom_status", "race", "current_status", "state_fips_code", "exposure_yn","case_onset_interval", "case_positive_specimen_interval","county_fips_code"], axis=1) #columns to definitely drop
 print("Before: ", df2.shape)
 df2.dropna(inplace=True)
 df2bool=~df2.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
@@ -97,7 +97,7 @@ print("After: ", df2after.shape)
 df2after.to_csv("CovData/df2.csv", index=False)
 #'icu_yn', 'hosp_yn', 'age_group,'county_fips_code', 'process',  'underlying_conditions_yn', 'ethnicity,  'sex', 'symptom_status, 'race', 'current_status', ‘'state_fips_code', 'exposure_yn'
 
-df3=df.drop(["sex","symptom_status", "race", "current_status", "exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
+df3=df.drop(["case_month", "sex","symptom_status", "race", "current_status", "state_fips_code", "exposure_yn","case_onset_interval", "case_positive_specimen_interval","county_fips_code"], axis=1) #columns to definitely drop
 print("Before: ", df3.shape)
 df3.dropna(inplace=True)
 df3bool=~df3.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
@@ -107,7 +107,7 @@ print("After: ", df3after.shape)
 df3after.to_csv("CovData/df3.csv", index=False)
 #'icu_yn', 'hosp_yn', 'age_group,'county_fips_code', 'process',  'underlying_conditions_yn', 'ethnicity,  'sex', 'symptom_status, 'race', 'current_status', ‘'state_fips_code', 'exposure_yn'
 
-df4=df.drop(["symptom_status", "race", "current_status", "exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
+df4=df.drop(["case_month","symptom_status", "race", "current_status", "state_fips_code", "exposure_yn","case_onset_interval", "case_positive_specimen_interval","county_fips_code"], axis=1) #columns to definitely drop
 print("Before: ", df4.shape)
 df4.dropna(inplace=True)
 df4bool=~df4.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
@@ -117,7 +117,7 @@ print("After: ", df4after.shape)
 df4after.to_csv("CovData/df4.csv", index=False)
 #'icu_yn', 'hosp_yn', 'age_group,'county_fips_code', 'process',  'underlying_conditions_yn', 'ethnicity,  'sex', 'symptom_status, 'race', 'current_status', ‘'state_fips_code', 'exposure_yn'
 
-df5=df.drop([ "race", "current_status", "exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
+df5=df.drop(["case_month", "race", "current_status", "state_fips_code", "exposure_yn","case_onset_interval", "case_positive_specimen_interval","county_fips_code"], axis=1) #columns to definitely drop
 print("Before: ", df5.shape)
 df5.dropna(inplace=True)
 df5bool=~df5.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
@@ -127,7 +127,7 @@ print("After: ", df5after.shape)
 df5after.to_csv("CovData/df5.csv", index=False)
 #'icu_yn', 'hosp_yn', 'age_group,'county_fips_code', 'process',  'underlying_conditions_yn', 'ethnicity,  'sex', 'symptom_status, 'race', 'current_status', ‘'state_fips_code', 'exposure_yn'
 
-df6=df.drop(["current_status", "exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
+df6=df.drop(["case_month","current_status", "state_fips_code", "exposure_yn","case_onset_interval", "case_positive_specimen_interval","county_fips_code"], axis=1) #columns to definitely drop
 print("Before: ", df6.shape)
 df6.dropna(inplace=True)
 df6bool=~df6.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
@@ -137,7 +137,7 @@ print("After: ", df6after.shape)
 df6after.to_csv("CovData/df6.csv", index=False)
 #'icu_yn', 'hosp_yn', 'age_group,'county_fips_code', 'process',  'underlying_conditions_yn', 'ethnicity,  'sex', 'symptom_status, 'race', 'current_status', ‘'state_fips_code', 'exposure_yn'
 
-df7=df.drop([ "exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
+df7=df.drop(["case_month", "state_fips_code", "exposure_yn","case_onset_interval", "case_positive_specimen_interval","county_fips_code"], axis=1) #columns to definitely drop
 print("Before: ", df7.shape)
 df7.dropna(inplace=True)
 df7bool=~df7.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
@@ -146,17 +146,17 @@ df7after=df7.loc[df7b]
 print("After: ", df7after.shape)
 df7after.to_csv("CovData/df7.csv", index=False)
 #'icu_yn', 'hosp_yn', 'age_group,'county_fips_code', 'process',  'underlying_conditions_yn', 'ethnicity,  'sex', 'symptom_status, 'race', 'current_status', ‘'state_fips_code', 'exposure_yn'
+#
+df8=df.drop(["case_month","exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
+print("Before: ", df8.shape)
+df8.dropna(inplace=True)
+df8bool=~df8.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
+df8b=df8bool.all(axis=1)#returns bool series (True if the row has all true values)
+df8after=df8.loc[df8b]
+print("After: ", df8after.shape)
+df8after.to_csv("CovData/df8.csv", index=False)
 
-# df8=df.drop(["exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
-# print("Before: ", df8.shape)
-# df8.dropna(inplace=True)
-# df8bool=~df8.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
-# df8b=df8bool.all(axis=1)#returns bool series (True if the row has all true values)
-# df8after=df8.loc[df8b]
-# print("After: ", df8after.shape)
-# df8after.to_csv("CovData/df8.csv", index=False)
-
-# df7=df.drop([ "ethnicity", "case_positive_specimen_interval", "case_onset_interval", ], axis=1) #columns to definitely drop
+# df7=df.drop(["case_month", "ethnicity", "case_positive_specimen_interval", "case_onset_interval", "state_fips_code"], axis=1) #columns to definitely drop
 # print("Before: ", df7.shape)
 # df7.dropna(inplace=True)
 # df7bool=~df7.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
@@ -165,8 +165,8 @@ df7after.to_csv("CovData/df7.csv", index=False)
 # print("After: ", df7after.shape)
 # df7after.to_csv("CovData/df7.csv", index=False)
 
-# "ethnicity", "case_positive_specimen_interval", "case_onset_interval",
-df9=df.drop(["current_status", "exposure_yn","case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
+#"case_month", "ethnicity", "case_positive_specimen_interval", "case_onset_interval", "state_fips_code"
+df9=df.drop(["case_month","current_status", "state_fips_code", "exposure_yn","case_onset_interval", "case_positive_specimen_interval","county_fips_code"], axis=1) #columns to definitely drop
 print("Before: ", df9.shape)
 df9.dropna(inplace=True)
 df9bool=~df9.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
@@ -182,57 +182,57 @@ df9after.to_csv("CovData/df9.csv", index=False)
 
 
 
-####DONT DELETE
-# df10=df.drop(["case_onset_interval", "case_positive_specimen_interval"], axis=1) #columns to definitely drop
-# print("Before: ", df10.shape)
-# df10.dropna(inplace=True)
-# df10bool=~df10.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
-# df10b=df10bool.all(axis=1)#returns bool series (True if the row has all true values)
-# df10after=df10.loc[df10b]
-# print("After: ", df10after.shape)
-# df10after.to_csv("CovData/df10.csv", index=False)
-#
-# dftree1=df.drop(["case_onset_interval", "case_positive_specimen_interval", "underlying_conditions_yn"], axis=1) #columns to definitely drop
-# print("Before: ", dftree1.shape)
-# dftree1.dropna(inplace=True)
-# dftree1bool=~dftree1.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
-# dftree1b=dftree1bool.all(axis=1)#returns bool series (True if the row has all true values)
-# dftree1after=dftree1.loc[dftree1b]
-# print("After: ", dftree1after.shape)
-# dftree1after.to_csv("CovData/dftree1.csv", index=False)
-#
-# dftree2=df.drop(["case_onset_interval", "case_positive_specimen_interval", "ethnicity", "underlying_conditions_yn"], axis=1) #columns to definitely drop
-# print("Before: ", dftree2.shape)
-# dftree2.dropna(inplace=True)
-# dftree2bool=~dftree2.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
-# dftree2b=dftree2bool.all(axis=1)#returns bool series (True if the row has all true values)
-# dftree2after=dftree2.loc[dftree2b]
-# print("After: ", dftree2after.shape)
-# dftree2after.to_csv("CovData/dftree2.csv", index=False)
-#
-# dftree3=df.drop(["case_onset_interval", "case_positive_specimen_interval", "ethnicity", "underlying_conditions_yn", "exposure_yn"], axis=1) #columns to definitely drop
-# print("Before: ", dftree3.shape)
-# dftree3.dropna(inplace=True)
-# dftree3bool=~dftree3.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
-# dftree3b=dftree3bool.all(axis=1)#returns bool series (True if the row has all true values)
-# dftree3after=dftree3.loc[dftree3b]
-# print("After: ", dftree3after.shape)
-# dftree3after.to_csv("CovData/dftree3.csv", index=False)
-#
-# dftree4=df.drop(["case_onset_interval", "case_positive_specimen_interval", "process", "underlying_conditions_yn", "exposure_yn"], axis=1) #columns to definitely drop
-# print("Before: ", dftree4.shape)
-# dftree4.dropna(inplace=True)
-# dftree4bool=~dftree4.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
-# dftree4b=dftree4bool.all(axis=1)#returns bool series (True if the row has all true values)
-# dftree4after=dftree4.loc[dftree4b]
-# print("After: ", dftree4after.shape)
-# dftree4after.to_csv("CovData/dftree4.csv", index=False)
-#
-# dftree5=df.drop(["case_onset_interval", "case_positive_specimen_interval", "process", "underlying_conditions_yn", "exposure_yn", "ethnicity"], axis=1) #columns to definitely drop
-# print("Before: ", dftree5.shape)
-# dftree5.dropna(inplace=True)
-# dftree5bool=~dftree5.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
-# dftree5b=dftree5bool.all(axis=1)#returns bool series (True if the row has all true values)
-# dftree5after=dftree5.loc[dftree5b]
-# print("After: ", dftree5after.shape)
-# dftree5after.to_csv("CovData/dftree5.csv", index=False)
+
+df10=df.drop(["case_month","case_onset_interval", "case_positive_specimen_interval","county_fips_code"], axis=1) #columns to definitely drop
+print("Before: ", df10.shape)
+df10.dropna(inplace=True)
+df10bool=~df10.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
+df10b=df10bool.all(axis=1)#returns bool series (True if the row has all true values)
+df10after=df10.loc[df10b]
+print("After: ", df10after.shape)
+df10after.to_csv("CovData/df10.csv", index=False)
+
+dftree1=df.drop(["case_month","case_onset_interval", "case_positive_specimen_interval", "underlying_conditions_yn","county_fips_code"], axis=1) #columns to definitely drop
+print("Before: ", dftree1.shape)
+dftree1.dropna(inplace=True)
+dftree1bool=~dftree1.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
+dftree1b=dftree1bool.all(axis=1)#returns bool series (True if the row has all true values)
+dftree1after=dftree1.loc[dftree1b]
+print("After: ", dftree1after.shape)
+dftree1after.to_csv("CovData/dftree1.csv", index=False)
+
+dftree2=df.drop(["case_month","case_onset_interval", "case_positive_specimen_interval", "ethnicity", "underlying_conditions_yn","county_fips_code"], axis=1) #columns to definitely drop
+print("Before: ", dftree2.shape)
+dftree2.dropna(inplace=True)
+dftree2bool=~dftree2.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
+dftree2b=dftree2bool.all(axis=1)#returns bool series (True if the row has all true values)
+dftree2after=dftree2.loc[dftree2b]
+print("After: ", dftree2after.shape)
+dftree2after.to_csv("CovData/dftree2.csv", index=False)
+
+dftree3=df.drop(["case_month","case_onset_interval", "case_positive_specimen_interval", "ethnicity", "underlying_conditions_yn", "exposure_yn","county_fips_code"], axis=1) #columns to definitely drop
+print("Before: ", dftree3.shape)
+dftree3.dropna(inplace=True)
+dftree3bool=~dftree3.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
+dftree3b=dftree3bool.all(axis=1)#returns bool series (True if the row has all true values)
+dftree3after=dftree3.loc[dftree3b]
+print("After: ", dftree3after.shape)
+dftree3after.to_csv("CovData/dftree3.csv", index=False)
+
+dftree4=df.drop(["case_month","case_onset_interval", "case_positive_specimen_interval", "process", "underlying_conditions_yn", "exposure_yn","county_fips_code"], axis=1) #columns to definitely drop
+print("Before: ", dftree4.shape)
+dftree4.dropna(inplace=True)
+dftree4bool=~dftree4.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
+dftree4b=dftree4bool.all(axis=1)#returns bool series (True if the row has all true values)
+dftree4after=dftree4.loc[dftree4b]
+print("After: ", dftree4after.shape)
+dftree4after.to_csv("CovData/dftree4.csv", index=False)
+
+dftree5=df.drop(["case_month","case_onset_interval", "case_positive_specimen_interval", "process", "underlying_conditions_yn", "exposure_yn", "ethnicity","county_fips_code"], axis=1) #columns to definitely drop
+print("Before: ", dftree5.shape)
+dftree5.dropna(inplace=True)
+dftree5bool=~dftree5.isin(["Unknown", "Missing"])#returns bool dataframe (false if unknown or missing)
+dftree5b=dftree5bool.all(axis=1)#returns bool series (True if the row has all true values)
+dftree5after=dftree5.loc[dftree5b]
+print("After: ", dftree5after.shape)
+dftree5after.to_csv("CovData/dftree5.csv", index=False)
